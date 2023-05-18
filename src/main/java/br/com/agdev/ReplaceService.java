@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,9 +19,10 @@ public class ReplaceService {
 
     public static final String FILE_SUBSTITUTIONS = System.getProperty("user.dir") + File.separator + "substitutions.json";
     public static final String FILE_FOLDERS_TO_IGNORE = System.getProperty("user.dir") + File.separator + "foldersToIgnore.txt";
+    private static final String FILE_EXTENSIONS_TO_IGNORE = System.getProperty("user.dir") + File.separator + "extensionsToIgnore.txt";;
 
     public static void replaceInFilesOfPath(Path source) {
-        replaceInFilesOfPath(source, getFoldersToIgnore());
+        replaceInFilesOfPath(source, getFoldersToIgnore(), getExtensionsToIgnore());
     }
 
     public static void replaceFile(Path source, Path destination) {
@@ -31,17 +33,23 @@ public class ReplaceService {
         }
     }
 
-    private static void replaceInFilesOfPath(Path source, List<String> foldersToIgnore) {
+    private static void replaceInFilesOfPath(Path source, List<String> foldersToIgnore, List<String> extensionsToIgnore) {
         try {
             List<Path> pathList = Files.list(source).toList();
             for (Path path : pathList) {
                 if (Files.isDirectory(path)) {
                     boolean runThroughThisFolder = !foldersToIgnore.contains(path.getFileName().toString());
                     if (runThroughThisFolder) {
-                        replaceInFilesOfPath(path, foldersToIgnore);
+                        replaceInFilesOfPath(path, foldersToIgnore, extensionsToIgnore);
                     } else {
                         System.out.println(String.format("Pasta %s sendo ignorada", path));
                     }
+                    continue;
+                }
+
+                boolean ignoreFile = extensionsToIgnore.contains(getFileExtension(path.getFileName().toString()));
+                if (ignoreFile) {
+                    System.out.println(String.format("Arquivo %s sendo ignorado", path));
                     continue;
                 }
 
@@ -89,5 +97,17 @@ public class ReplaceService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private static List<String> getExtensionsToIgnore() {
+        try {
+            return Files.readAllLines(Paths.get(FILE_EXTENSIONS_TO_IGNORE));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static String getFileExtension(String filename) {
+        return filename.substring(filename.lastIndexOf(".") + 1);
     }
 }

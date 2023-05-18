@@ -8,7 +8,7 @@ public class Main {
 //        String folder = "03.01-conhecendo-o-modelo-de-dominio-do-projeto-e-criando-as-entidades";
 //        String path = "/home/als/Documents/" + folder;
 
-        String path = "/home/als/Documents/repositorios/curso-especialista-jpa/03.03-exercicio-mapear-classe-pedido";
+        String path = "/home/als/Documents/repositorios/curso-especialista-jpa/05.01-estados-e-ciclo-de-vida-dos-objetos";
         String sourcePomXml = "/home/als/Documents/02.17-conhecendo-e-usando-lombok/pom.xml";
         String sourcePersistenceXml = "/home/als/Documents/02.17-conhecendo-e-usando-lombok/src/main/resources/META-INF/persistence.xml";
 
