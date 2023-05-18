@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -19,10 +18,14 @@ public class ReplaceService {
 
     public static final String FILE_SUBSTITUTIONS = System.getProperty("user.dir") + File.separator + "substitutions.json";
     public static final String FILE_FOLDERS_TO_IGNORE = System.getProperty("user.dir") + File.separator + "foldersToIgnore.txt";
-    private static final String FILE_EXTENSIONS_TO_IGNORE = System.getProperty("user.dir") + File.separator + "extensionsToIgnore.txt";;
+    public static final String FILE_EXTENSIONS_TO_IGNORE = System.getProperty("user.dir") + File.separator + "extensionsToIgnore.txt";
 
     public static void replaceInFilesOfPath(Path source) {
-        replaceInFilesOfPath(source, getFoldersToIgnore(), getExtensionsToIgnore());
+        replaceInFilesOfPath(
+                source,
+                getFoldersToIgnore(),
+                getExtensionsToIgnore(),
+                getSubstitutions());
     }
 
     public static void replaceFile(Path source, Path destination) {
@@ -33,14 +36,19 @@ public class ReplaceService {
         }
     }
 
-    private static void replaceInFilesOfPath(Path source, List<String> foldersToIgnore, List<String> extensionsToIgnore) {
+    private static void replaceInFilesOfPath(
+            Path source,
+            List<String> foldersToIgnore,
+            List<String> extensionsToIgnore,
+            List<Substitution> substitutions) {
+
         try {
             List<Path> pathList = Files.list(source).toList();
             for (Path path : pathList) {
                 if (Files.isDirectory(path)) {
                     boolean runThroughThisFolder = !foldersToIgnore.contains(path.getFileName().toString());
                     if (runThroughThisFolder) {
-                        replaceInFilesOfPath(path, foldersToIgnore, extensionsToIgnore);
+                        replaceInFilesOfPath(path, foldersToIgnore, extensionsToIgnore, substitutions);
                     } else {
                         System.out.println(String.format("Pasta %s sendo ignorada", path));
                     }
@@ -53,8 +61,8 @@ public class ReplaceService {
                     continue;
                 }
 
-                System.out.println(String.format("Arquivo %s sendo varificado", path));
-                StringBuffer currentFile = new StringBuffer();
+                System.out.println(String.format("Arquivo %s sendo verificado", path));
+                StringBuilder currentFile = new StringBuilder();
                 Files.newBufferedReader(path)
                         .lines()
                         .forEach(line -> {
@@ -63,7 +71,7 @@ public class ReplaceService {
                         });
 
                 String replaced = currentFile.toString();
-                for (Substitution substitution : getSubstitutionList().getSubstitutions()) {
+                for (Substitution substitution : substitutions) {
                     Pattern pattern = Pattern.compile(substitution.getRegex(), Pattern.MULTILINE);
                     Matcher matcher = pattern.matcher(replaced);
                     while (matcher.find()) {
@@ -82,10 +90,13 @@ public class ReplaceService {
         }
     }
 
-    private static SubstitutionsList getSubstitutionList() {
+    private static List<Substitution> getSubstitutions() {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            return objectMapper.readValue(Files.newInputStream(Paths.get(FILE_SUBSTITUTIONS)), SubstitutionsList.class);
+            SubstitutionsList substitutionsList =
+                    objectMapper.readValue(Files.newInputStream(Paths.get(FILE_SUBSTITUTIONS)), SubstitutionsList.class);
+
+            return substitutionsList.getSubstitutions();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
