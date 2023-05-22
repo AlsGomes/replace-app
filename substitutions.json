@@ -64,6 +64,11 @@
             "oldValue": "import org.junit.BeforeClass;",
             "newValue": "import org.junit.jupiter.api.BeforeAll;",
             "regex": "^import org\\.junit\\.BeforeClass;$"
+        },
+        {
+            "oldValue": "@Lob",
+            "newValue": "@Lob\n\t@Column(length = 1000)",
+            "regex": "@Lob$"
         }
     ]
 }
