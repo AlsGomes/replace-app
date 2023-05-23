@@ -2,6 +2,7 @@ package br.com.agdev;
 
 import br.com.agdev.model.Substitution;
 import br.com.agdev.model.SubstitutionsList;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
@@ -92,6 +93,8 @@ public class ReplaceService {
 
     private static List<Substitution> getSubstitutions() {
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
         try {
             SubstitutionsList substitutionsList =
                     objectMapper.readValue(Files.newInputStream(Paths.get(FILE_SUBSTITUTIONS)), SubstitutionsList.class);

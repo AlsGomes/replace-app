@@ -1,69 +1,68 @@
 {
     "substitutions": [
         {
-            "oldValue": "import javax.",
             "newValue": "import jakarta.",
             "regex": "^import javax\\."
         },
         {
-            "oldValue": "import org.junit.*;",
             "newValue": "import org.junit.jupiter.api.*;",
             "regex": "^import org\\.junit\\.\\*;$"
         },
         {
-            "oldValue": "import org.junit.Assert;",
             "newValue": "import org.junit.jupiter.api.Assertions;",
             "regex": "^import org\\.junit\\.Assert;$"
         },
         {
-            "oldValue": "import org.junit.Test;",
             "newValue": "import org.junit.jupiter.api.Test;",
             "regex": "^import org\\.junit\\.Test;$"
         },
         {
-            "oldValue": "Assert.",
             "newValue": "Assertions.",
             "regex": "Assert\\."
         },
         {
-            "oldValue": "@Before",
             "newValue": "@BeforeEach",
             "regex": "@Before$"
         },
         {
-            "oldValue": "@BeforeClass",
             "newValue": "@BeforeAll",
             "regex": "@BeforeClass$"
         },
         {
-            "oldValue": "@After",
             "newValue": "@AfterEach",
             "regex": "@After$"
         },
         {
-            "oldValue": "@AfterClass",
             "newValue": "@AfterAll",
             "regex": "@AfterClass$"
         },
         {
-            "oldValue": "import org.junit.After;",
             "newValue": "import org.junit.jupiter.api.AfterEach;",
             "regex": "^import org\\.junit\\.After;$"
         },
         {
-            "oldValue": "import org.junit.AfterClass;",
             "newValue": "import org.junit.jupiter.api.AfterAll;",
             "regex": "^import org\\.junit\\.AfterClass;$"
         },
         {
-            "oldValue": "import org.junit.Before;",
             "newValue": "import org.junit.jupiter.api.BeforeEach;",
             "regex": "^import org\\.junit\\.Before;$"
         },
         {
-            "oldValue": "import org.junit.BeforeClass;",
             "newValue": "import org.junit.jupiter.api.BeforeAll;",
             "regex": "^import org\\.junit\\.BeforeClass;$"
+        },
+        {
+            "newValue": "@Lob\n    @Column(length = 1000)\n    private byte[] foto;",
+            "regex": "@Lob$\\n\\s{4}private byte\\[\\]\\sfoto;"
+        },
+        {
+            "newValue": "@Lob\n    @Column(length = 1000, nullable = false)\n    private byte[] xml;",
+            "regex": "@Column\\(nullable = false\\)$\\n\\s{4}@Lob$\\n\\s{4}private byte\\[\\]\\sxml;"
+        },
+        {
+            "newValue": "@Lob\n    @Column(length = Length.LONG32)\n    private String descricao;",
+            "regex": "@Lob$\\n\\s{4}private String descricao;"
         }
     ]
 }
