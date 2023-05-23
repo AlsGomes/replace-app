@@ -8,7 +8,7 @@ public class Main {
 //        String folder = "03.01-conhecendo-o-modelo-de-dominio-do-projeto-e-criando-as-entidades";
 //        String path = "/home/als/Documents/" + folder;
 
-        String path = "/home/als/Documents/repositorios/curso-especialista-jpa/06.14-gravando-em-duas-tabelas-com-secondarytable";
+        String path = "/home/als/Documents/repositorios/curso-especialista-jpa/07.08-configurando-chaves-estrangeiras-com-joincolumn";
 
         String source = "/home/als/Documents/06.05-chave-composta-com-embeddedid";
         String sourcePomXml = source + "/pom.xml";
