@@ -8,9 +8,9 @@ public class Main {
 //        String folder = "03.01-conhecendo-o-modelo-de-dominio-do-projeto-e-criando-as-entidades";
 //        String path = "/home/als/Documents/" + folder;
 
-        String path = "/home/als/Documents/repositorios/curso-especialista-jpa/07.08-configurando-chaves-estrangeiras-com-joincolumn";
+        String path = "/home/als/Documents/repositorios/curso-especialista-jpa/08.03-exercicio-fazendo-insercoes-em-cascata";
 
-        String source = "/home/als/Documents/06.05-chave-composta-com-embeddedid";
+        String source = "/home/als/Documents/07.16-configurando-propriedades-da-unidade-de-persistencia-dinamicamente-para-schema-generation";
         String sourcePomXml = source + "/pom.xml";
         String sourcePersistenceXml = source + "/src/main/resources/META-INF/persistence.xml";
         String sourceGerenciamentoTransacoesTest = source + "/src/test/java/com/algaworks/ecommerce/conhecendoentitymanager/GerenciamentoTransacoesTest.java";
