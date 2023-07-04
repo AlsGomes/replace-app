@@ -63,6 +63,14 @@
         {
             "newValue": "@Lob\n    @Column(length = Length.LONG32)\n    private String descricao;",
             "regex": "@Lob$\\n\\s{4}private String descricao;"
+        },
+        {
+            "newValue": "jakarta.persistence.fetchgraph",
+            "regex": "javax.persistence.fetchgraph"
+        },
+        {
+            "newValue": "jakarta.persistence.loadgraph",
+            "regex": "javax.persistence.loadgraph"
         }
     ]
 }
