@@ -71,6 +71,14 @@
         {
             "newValue": "jakarta.persistence.loadgraph",
             "regex": "javax.persistence.loadgraph"
+        },
+        {
+            "newValue": "jakarta.persistence.cache.retrieveMode",
+            "regex": "javax.persistence.cache.retrieveMode"
+        },
+        {
+            "newValue": "jakarta.persistence.cache.storeMode",
+            "regex": "javax.persistence.cache.storeMode"
         }
     ]
 }
