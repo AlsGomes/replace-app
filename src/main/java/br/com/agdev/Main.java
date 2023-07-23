@@ -8,9 +8,9 @@ public class Main {
 //        String folder = "03.01-conhecendo-o-modelo-de-dominio-do-projeto-e-criando-as-entidades";
 //        String path = "/home/als/Documents/" + folder;
 
-        String path = "/home/als/Documents/repositorios/curso-especialista-jpa/15.06-analisando-uma-aplicacao-web-com-multitenant";
+        String path = "/home/als/Documents/repositorios/curso-especialista-jpa/17.02-configurando-um-projeto-web-com-spring-mvc";
 
-        String source = "/home/als/Documents/15.05-implementando-multitenancy-com-abordagem-por-maquina";
+        String source = "/home/als/Documents/17.01-reconhecendo-o-que-aprendemos-em-aplicacoes-web";
         String sourcePomXml = source + "/pom.xml";
         String sourcePersistenceXml = source + "/src/main/resources/META-INF/persistence.xml";
         String sourceGerenciamentoTransacoesTest = source + "/src/test/java/com/algaworks/ecommerce/conhecendoentitymanager/GerenciamentoTransacoesTest.java";
@@ -36,8 +36,8 @@ public class Main {
         ReplaceService.replaceFile(Paths.get(sourceFlushTest), Paths.get(destFlushTest));
 //        ReplaceService.replaceFile(Paths.get(sourceRelacionamentoOneToManyTest), Paths.get(destRelacionamentoOneToManyTest));
         ReplaceService.replaceFile(Paths.get(sourceExecutarDDL), Paths.get(destExecutarDDL));
-        ReplaceService.replaceFile(Paths.get(sourceEcmMachineMultiTenantConnectionProvider), Paths.get(destEcmMachineMultiTenantConnectionProvider));
-        ReplaceService.replaceFile(Paths.get(sourceEcmSchemaMultiTenantConnectionProvider), Paths.get(destEcmSchemaMultiTenantConnectionProvider));
+//        ReplaceService.replaceFile(Paths.get(sourceEcmMachineMultiTenantConnectionProvider), Paths.get(destEcmMachineMultiTenantConnectionProvider));
+//        ReplaceService.replaceFile(Paths.get(sourceEcmSchemaMultiTenantConnectionProvider), Paths.get(destEcmSchemaMultiTenantConnectionProvider));
 
         // /home/als/Documents/repositorios/curso-especialista-jpa/15.05-implementando-multitenancy-com-abordagem-por-maquina/src/main/java/com/algaworks/ecommerce/hibernate/EcmMachineMultiTenantConnectionProvider.java
     }
